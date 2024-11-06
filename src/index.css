@@ -1,13 +1,54 @@
-body {
+/* Tailwind Setting */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset Style */
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  color-scheme: dark;
 }
+
+body {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+/* Common Page Section Style */
+.page-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  padding: 0.5rem;
+}
+
+
+/* Custom Logo Style */
+.logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom left, #007fe8 15%, #00cdfc);
+  position: relative;
+}
+
+.logo::before {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(
+    to bottom left,
+    rgba(249, 180, 70, 1) 15%,
+    rgba(234, 47, 152, 0.8)
+  );
+  border-radius: 5px;
+  _border: 2px solid #ebf5fc;
+}
+
