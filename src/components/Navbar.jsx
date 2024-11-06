@@ -4,7 +4,7 @@ import { navMenus } from '../utils/data'
 import { FcGoogle } from "react-icons/fc";
 
 const Navbar = ({menuIdx}) => {
-  console.log(menuIdx);
+  // console.log(menuIdx);
   return (
     <nav className='navi bg-[#212121] w-1/5 h-full rounded-sm border border-neutral-500 py-10 px-4 flex flex-col justify-between items-center'>
       <div className="logo-wrapper flex w-full items-center justify-center gap-8">
