@@ -5,10 +5,7 @@ module.exports = {
   ],
   theme: {
     extend: {},
-    fontFamily: {
-      customFontEn: ['IBM Plex Mono', 'monosapce'],
-      customFontKR: ['IBM Plex Sans KR', 'sans-serif'],
-    },
+    fontFamily: {},
   },
   plugins: [],
 }

@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: "IBM Plex Mono", "IBM Plex Sans KR", sans-serif, monospace;
 }
 
 /* Common Page Section Style */
@@ -24,6 +24,7 @@ body {
   height: 100vh;
   display: flex;
   padding: 0.5rem;
+  gap: 0.5rem;
 }
 
 
@@ -52,3 +53,33 @@ body {
   _border: 2px solid #ebf5fc;
 }
 
+/* Login Button Style */
+.login-btn{
+  position: relative;
+}
+
+.login-btn > div{
+  width: 100%;
+}
+
+.login-btn button{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.login-btn iframe{
+  position: absolute !important;
+  width: 100% !important;
+  z-index: 99;
+  opacity: 0;
+}
+
+
+/* Item Button Style */
+.item-btn{
+  display: block;
+  padding: 0.25rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+}
