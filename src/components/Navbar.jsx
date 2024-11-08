@@ -54,7 +54,7 @@ const Navbar = ({menuIdx}) => {
   }
 
   return (
-    <nav className='navi bg-[#1a1a1a] w-1/5 h-full rounded-md border border-neutral-500 py-10 px-4 flex flex-col justify-between items-center'>
+    <nav className='navi bg-[#1a1a1a] w-1/3 sm:w-1/4 lg:w-1/5 h-full rounded-md border border-neutral-500 py-10 px-4 flex flex-col justify-between items-center'>
       <div className="logo-wrapper flex w-full items-center justify-center gap-8">
         <div className="logo"></div>
         <h2 className='font-medium text-xl'>
@@ -66,7 +66,7 @@ const Navbar = ({menuIdx}) => {
         {
           navMenus.map((menu, idx)=>(
             <li key={idx} className={`rounded-sm mb-1 border border-neutral-400 hover:bg-neutral-700 transition-all duration-200 ${menu.idx === menuIdx ? 'bg-neutral-700' : ''}`}>
-              <Link to={menu.to} className='flex gap-4 items-center py-2 px-10'>{menu.icon} {menu.label}</Link>
+              <Link to={menu.to} className='flex gap-2 items-center py-2 px-8'>{menu.icon} {menu.label}</Link>
             </li>
           ))
         }
