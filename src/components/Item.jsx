@@ -95,12 +95,12 @@ const Item = ({task}) => {
             <div className="item-footer-left flex gap-1">
               {
                 iscompleted ? (
-                  <button className='item-btn bg-green-600 tracking-tight'>completed</button>
+                  <button className='item-btn bg-green-600 tracking-tight hover:bg-green-700'>completed</button>
                 ) : (
-                  <button className='item-btn hidden bg-cyan-600 tracking-tight'>Incompleted</button>)
+                  <button className='item-btn hidden bg-cyan-600 tracking-tight hover:bg-cyan-700'>Incompleted</button>)
               }
               {
-                isimportant && (<button className='item-btn bg-rose-500 tracking-tight'>Important</button>)
+                isimportant && (<button className='item-btn bg-rose-500 tracking-tight hover:bg-rose-600'>Important</button>)
               }
             </div>
             <div className="item-footer-right flex gap-1 items-center">

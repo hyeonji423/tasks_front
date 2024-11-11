@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { DELETE_TASK_API_URL, GET_TASKS_API_URL } from '../../utils/apiUrl'
-import { deleteRequest, getRequest } from '../../utils/requestMethods'
+import { DELETE_TASK_API_URL, GET_TASKS_API_URL, POST_TASK_API_URL } from '../../utils/apiUrl'
+import { deleteRequest, getRequest, postRequest } from '../../utils/requestMethods'
 
 
-// thunk 함수 정의 : 공통된 비동기 액션 생성 로직을 별도의 함수로 분리
+// get item thunk function 정의
 const getItemsFetchThunk = (actionType, apiURL)=>{
   return createAsyncThunk(actionType, async (userId)=>{
     // console.log(apiURL, userId);
@@ -11,13 +11,14 @@ const getItemsFetchThunk = (actionType, apiURL)=>{
     return await getRequest(fullPath)
   })
 }
-// thunk 함수 호출
+// get item thunk 함수 호출
 export const fetchGetItemsData = getItemsFetchThunk(
   'fetchGetItems', // action type
   GET_TASKS_API_URL // 요청 url
 )
 
 
+// delete thunk function 정의
 const deleteItemFetchThunk = (actionType, apiURL)=>{
   return createAsyncThunk(actionType, async (id)=>{
     // console.log(apiURL, id);
@@ -28,10 +29,26 @@ const deleteItemFetchThunk = (actionType, apiURL)=>{
     return await deleteRequest(fullPath, options)
   })
 }
-// thunk 함수 호출
+// delete item thunk 함수 호출
 export const fetchDeleteItemData = deleteItemFetchThunk(
   'fetchDeleteItem', // action type
   DELETE_TASK_API_URL // 요청 url
+)
+
+
+// post thunk function 정의
+const postItemFetchThunk = (actionType, apiURL)=>{
+  return createAsyncThunk(actionType, async(postData)=>{
+    const options = {
+      body: JSON.stringify(postData) // 표준 json 문자열로 변환
+    }
+    return await postRequest(apiURL, options)
+  })
+}
+// post item thunk 함수 호출
+export const fetchPostItemData = postItemFetchThunk(
+  'fetchPostItem', // action type
+  POST_TASK_API_URL // 요청 url
 )
 
 
@@ -52,6 +69,7 @@ const apiSlice = createSlice({
     // 초기 상태 지정
     getItemsData: null,
     deleteItemData: null,
+    postItemData: null,
   },
   
   extraReducers: (builder)=>{
@@ -61,6 +79,9 @@ const apiSlice = createSlice({
 
       .addCase(fetchDeleteItemData.fulfilled, handleFulfilled('deleteItemData'))
       .addCase(fetchDeleteItemData.rejected, handleRejected)
+
+      .addCase(fetchPostItemData.fulfilled, handleFulfilled('postItemData'))
+      .addCase(fetchPostItemData.rejected, handleRejected)
   }
 })  // slice 객체 저장
 
