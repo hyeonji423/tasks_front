@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoIosCloseCircle } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../redux/slices/modalSlice';
 import { toast } from 'react-toastify';
-import { fetchGetItemsData, fetchPostItemData } from '../redux/slices/apiSlice';
+import { fetchGetItemsData, fetchPostItemData, fetchUpdateItemData } from '../redux/slices/apiSlice';
 
 const Modal = () => {
   const dispatch = useDispatch()
@@ -56,7 +56,13 @@ const Modal = () => {
         await dispatch(fetchPostItemData(formData)).unwrap()
         toast.success('새로운 할 일이 추가됐습니다.')
       }
+      else if(modalType === 'update' && task) {
+        await dispatch(fetchUpdateItemData(formData)).unwrap()
+        toast.success('할 일이 수정됐습니다.')
+      }
+
       handleCloseModal()
+      
       await dispatch(fetchGetItemsData(user?.sub)).unwrap()
     }
     catch (error) {
@@ -84,6 +90,32 @@ const Modal = () => {
 
   const btnTitle = showModalTitle(modalType, '할 일 수정하기', '', '할 일 추가하기')
 
+
+  useEffect(()=>{
+    if((modalType === 'details' && task) || (modalType === 'update' && task)){
+      setFormData({
+        title: task.title,
+        description: task.description,
+        date: task.date,
+        isCompleted: task.iscompleted,
+        isImportant: task.isimportant,
+        id: task._id,
+      })
+    }
+    else{
+      setFormData({
+        title: '',
+        description: '',
+        date: '',
+        isCompleted: false,
+        isImportant: false,
+        userId: user?.sub,
+      })
+    }
+  }, [modalType, task, user?.sub])
+
+  // console.log(task);
+
   return (
     <div className='modal fixed bg-neutral-950 bg-opacity-60 w-full h-full left-0 top-0 flex items-center justify-center z-50'>
       <div className='form-wrapper bg-neutral-700 rounded-xl w-1/2 relative p-4'>
@@ -93,26 +125,26 @@ const Modal = () => {
         <form className='w-full' onSubmit={handleSubmit}>
           <div className="input-control">
             <label htmlFor="title">제목</label>
-            <input type="text" id='title' name='title' value={formData.title} placeholder='제목을 입력해 주세요' onChange={handleChange} />
+            <input type="text" id='title' name='title' value={formData.title} placeholder='제목을 입력해 주세요' onChange={handleChange} {...(modalType === 'details' && {disabled: true})} />
           </div>
           <div className="input-control">
             <label htmlFor="description">내용</label>
-            <textarea type="text" id='description' name='description' value={formData.description} placeholder='내용을 입력해 주세요' onChange={handleChange}></textarea>
+            <textarea type="text" id='description' name='description' value={formData.description} placeholder='내용을 입력해 주세요' onChange={handleChange} {...(modalType === 'details' && {disabled: true})}></textarea>
           </div>
           <div className="input-control">
             <label htmlFor="date">입력 날짜</label>
-            <input type="date" id='date' name='date' value={formData.date} onChange={handleChange} />
+            <input type="date" id='date' name='date' value={formData.date} onChange={handleChange} {...(modalType === 'details' && {disabled: true})} />
           </div>
           <div className="input-control toggler">
             <label htmlFor="isCompleted">완료 여부</label>
-            <input type="checkbox" id='isCompleted' name='isCompleted' checked={formData.isCompleted} onChange={handleChange} />
+            <input type="checkbox" id='isCompleted' name='isCompleted' checked={formData.isCompleted} onChange={handleChange} {...(modalType === 'details' && {disabled: true})} />
           </div>
           <div className="input-control toggler">
             <label htmlFor="isImportant">중요한 할 일</label>
-            <input type="checkbox" id='isImportant' name='isImportant' checked={formData.isImportant} onChange={handleChange} />
+            <input type="checkbox" id='isImportant' name='isImportant' checked={formData.isImportant} onChange={handleChange} {...(modalType === 'details' && {disabled: true})} />
           </div>
           <div className="submit-btn flex justify-end">
-            <button className='flex justify-end bg-[#222] w-fit py-3 px-6 rounded-md hover:bg-black' type='submit'>{btnTitle}</button>
+            <button className={`flex justify-end bg-[#222] w-fit py-3 px-6 rounded-md hover:bg-black ${modalType === 'details' ? 'hidden' : ''}`} type='submit'>{btnTitle}</button>
           </div>
         </form>
       </div>

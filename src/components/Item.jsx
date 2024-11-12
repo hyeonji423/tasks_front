@@ -6,6 +6,7 @@ import { fetchDeleteItemData, fetchGetItemsData } from "../redux/slices/apiSlice
 import { toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { openModal } from '../redux/slices/modalSlice';
 
 
 const Item = ({task}) => {
@@ -77,6 +78,19 @@ const Item = ({task}) => {
     }
   }
 
+  const handleOpenDetailModal = () =>{
+    dispatch(openModal({modalType: 'details', task}))
+  }
+
+  const handleOpenUpdateModal = () =>{
+    dispatch(openModal({modalType: 'update', task}))
+  }
+
+  const changeCompleted = () =>{
+    // setIsCompleted(!isCompleted)을 호출하면 상태 업데이트가 비동기적으로 이루어지기 때문에, isCompleted의 값이 즉시 변경되지 않는다.
+    // 따라서 updateCompletedData 객체를 생성할 때 isCompleted의 이전 값이 사용된다. 이로 인해 true/false가 한 단계씩 밀리게 된다.
+  }
+
 
   return (
     <div className='item w-1/2 lg:w-1/3 h-[25vh] p-[0.25rem]'>
@@ -85,7 +99,7 @@ const Item = ({task}) => {
           <h2 className='item-title text-lg font-normal mb-1.5 relative pt-1 pb-3 flex justify-between px-1'>
             <span className='item-line w-full absolute bottom-1 left-0 h-px bg-neutral-500'></span>
             {title}
-            <span className='text-sm py-1 px-3 border border-neutral-500 rounded-md hover:bg-neutral-600 hover:text-neutral-50 cursor-pointer mb-1'>자세히</span>
+            <span className='text-sm py-1 px-3 border border-neutral-500 rounded-md hover:bg-neutral-600 hover:text-neutral-50 cursor-pointer mb-1' onClick={handleOpenDetailModal}>자세히</span>
           </h2>
           <p className='px-1 text-[15px]'>{textLengthOverCut(description, 60, ' ...')}</p>
         </div>
@@ -95,9 +109,9 @@ const Item = ({task}) => {
             <div className="item-footer-left flex gap-1">
               {
                 iscompleted ? (
-                  <button className='item-btn bg-green-600 tracking-tight hover:bg-green-700'>completed</button>
+                  <button className='item-btn bg-green-600 tracking-tight hover:bg-green-700' onClick={changeCompleted}>completed</button>
                 ) : (
-                  <button className='item-btn hidden bg-cyan-600 tracking-tight hover:bg-cyan-700'>Incompleted</button>)
+                  <button className='item-btn bg-cyan-600 tracking-tight hover:bg-cyan-700' onClick={changeCompleted}>Incompleted</button>)
               }
               {
                 isimportant && (<button className='item-btn bg-rose-500 tracking-tight hover:bg-rose-600'>Important</button>)
@@ -105,7 +119,7 @@ const Item = ({task}) => {
             </div>
             <div className="item-footer-right flex gap-1 items-center">
               <button>
-                <MdEditDocument className='w-6 h-6' />
+                <MdEditDocument className='w-6 h-6' onClick={handleOpenUpdateModal} />
               </button>
               <button className='delete' onClick={handleDeleteItem}>
                 <MdDelete className='w-6 h-6' />
