@@ -54,12 +54,22 @@ export const fetchDeleteItemData = deleteItemFetchThunk(
 
 
 // update completed thunk function 정의
-const updateCompletedItemFetchThunk = (actionType, apiURL)=>{
-  return createAsyncThunk(actionType, async (isCompleted)=>{
+const updateCompletedFetchThunk = (actionType, apiURL)=>{
+  return createAsyncThunk(actionType, async (completedData)=>{
+    console.log(completedData);
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(completedData),
+    }
+    
+    return await patchRequest(apiURL, options)
   })
 }
 // update completed item thunk 함수 호출
-export const fetchUpdateCompletedItemData = updateCompletedItemFetchThunk(
+export const fetchUpdateCompletedData = updateCompletedFetchThunk(
   'fetchUpdateCompletedItem', // action type
   UPDATE_COMPLETED_TASK_API_URL // 요청 url
 )
@@ -100,6 +110,7 @@ const apiSlice = createSlice({
     deleteItemData: null,
     postItemData: null,
     updateItemData: null,
+    updateCompletedData: null,
   },
   
   extraReducers: (builder)=>{
@@ -115,6 +126,9 @@ const apiSlice = createSlice({
 
       .addCase(fetchUpdateItemData.fulfilled, handleFulfilled('updateItemData'))
       .addCase(fetchUpdateItemData.rejected, handleRejected)
+
+      .addCase(fetchUpdateCompletedData.fulfilled, handleFulfilled('updateCompletedData'))
+      .addCase(fetchUpdateCompletedData.rejected, handleRejected)
   }
 })  // slice 객체 저장
 
