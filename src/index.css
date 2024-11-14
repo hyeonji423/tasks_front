@@ -88,7 +88,7 @@ body {
 /* Post Input Modal Style */
 .input-control{
   position: relative;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
   font-weight: 500;
 
   input, textarea{

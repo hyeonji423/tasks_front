@@ -115,7 +115,7 @@ const Item = ({task}) => {
 
 
   return (
-    <div className='item w-1/2 lg:w-1/3 h-[25vh] p-[0.25rem]'>
+    <div className='item w-full md:w-1/2 xl:w-1/3 h-[25vh] p-[0.25rem]'>
       <div className='w-full h-full border border-neutral-500 rounded-md bg bg-neutral-800 py-3 px-4 flex flex-col justify-between'>
         <div className="upper text-neutral-200">
           <h2 className='item-title text-lg font-normal mb-1.5 relative pt-1 pb-3 flex justify-between px-1'>

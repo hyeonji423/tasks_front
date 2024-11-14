@@ -6,7 +6,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 const LoadingSkeleton = () => {
   return (
-    <div className='flex flex-col justify-between w-1/3 p-4'>
+    <div className='flex flex-col justify-between w-full md:w-1/2 lg:w-1/3 p-4'>
       <div>
         <Skeleton width='40%' height='30px' />
       </div>

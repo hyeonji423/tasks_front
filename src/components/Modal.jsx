@@ -118,33 +118,33 @@ const Modal = () => {
 
   return (
     <div className='modal fixed bg-neutral-950 bg-opacity-60 w-full h-full left-0 top-0 flex items-center justify-center z-50'>
-      <div className='form-wrapper bg-neutral-700 rounded-xl w-1/2 relative p-4'>
-        <h2 className='text-lg border-b border-neutral-300 w-fit'>{modalTitle}</h2>
+      <div className='form-wrapper bg-neutral-700 rounded-xl w-4/5 sm:w-3/4 lg:w-1/2 relative p-4'>
+        <h2 className='text-lg lg:text-xl border-b border-neutral-300 w-fit'>{modalTitle}</h2>
         <IoIosCloseCircle className='absolute right-3 top-4 cursor-pointer w-7 h-7' onClick={handleCloseModal} />
 
         <form className='w-full' onSubmit={handleSubmit}>
-          <div className="input-control">
-            <label htmlFor="title">제목</label>
+          <div className="input-control lg:font-normal text-base lg:text-lg">
+            <label htmlFor="title" className='inline-block mb-1'>제목</label>
             <input type="text" id='title' name='title' value={formData.title} placeholder='제목을 입력해 주세요' onChange={handleChange} {...(modalType === 'details' && {disabled: true})} />
           </div>
-          <div className="input-control">
-            <label htmlFor="description">내용</label>
+          <div className="input-control lg:font-normal text-base lg:text-lg">
+            <label htmlFor="description" className='inline-block mb-1'>내용</label>
             <textarea type="text" id='description' name='description' value={formData.description} placeholder='내용을 입력해 주세요' onChange={handleChange} {...(modalType === 'details' && {disabled: true})}></textarea>
           </div>
-          <div className="input-control">
-            <label htmlFor="date">입력 날짜</label>
+          <div className="input-control lg:font-normal text-base lg:text-lg">
+            <label htmlFor="date" className='inline-block mb-1'>입력 날짜</label>
             <input type="date" id='date' name='date' value={formData.date} onChange={handleChange} {...(modalType === 'details' && {disabled: true})} />
           </div>
-          <div className="input-control toggler">
-            <label htmlFor="isCompleted">완료 여부</label>
+          <div className="input-control toggler lg:font-normal text-base lg:text-lg">
+            <label htmlFor="isCompleted" className='inline-block mb-1'>완료 여부</label>
             <input type="checkbox" id='isCompleted' name='isCompleted' checked={formData.isCompleted} onChange={handleChange} {...(modalType === 'details' && {disabled: true})} />
           </div>
-          <div className="input-control toggler">
-            <label htmlFor="isImportant">중요한 할 일</label>
+          <div className="input-control toggler lg:font-normal text-base lg:text-lg">
+            <label htmlFor="isImportant" className='inline-block mb-1'>중요한 할 일</label>
             <input type="checkbox" id='isImportant' name='isImportant' checked={formData.isImportant} onChange={handleChange} {...(modalType === 'details' && {disabled: true})} />
           </div>
           <div className="submit-btn flex justify-end">
-            <button className={`flex justify-end bg-[#222] w-fit py-3 px-6 rounded-md hover:bg-black ${modalType === 'details' ? 'hidden' : ''}`} type='submit'>{btnTitle}</button>
+            <button className={`flex justify-end bg-[#222] w-fit py-3 px-6 rounded-md hover:bg-black lg:font-normal text-sm lg:text-base ${modalType === 'details' ? 'hidden' : ''}`} type='submit'>{btnTitle}</button>
           </div>
         </form>
       </div>

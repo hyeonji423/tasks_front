@@ -7,6 +7,7 @@ import { fetchGetItemsData } from '../redux/slices/apiSlice'
 import { SkeletonTheme } from 'react-loading-skeleton'
 import LoadingSkeleton from './LoadingSkeleton'
 import Modal from './Modal'
+import { openModal } from '../redux/slices/modalSlice';
 
 
 const ItemPanel = ({pageTitle, filterCompleted, filterImportant}) => {
@@ -67,12 +68,20 @@ const ItemPanel = ({pageTitle, filterCompleted, filterImportant}) => {
     return filterImportant ? task.isimportant : !task.isimportant
   })
 
+  const handleOpenModal = () => {
+    dispatch(openModal({ modalType:"create", task: null }))
+  }
+
 
   return (
-    <div className='panel bg-[#1a1a1a] w-4/5 h-full rounded-md border border-neutral-500 py-5 px-4 overflow-y-auto'>
+    <div className='panel bg-[#1a1a1a] w-[calc(100%-80px)] lg:w-4/5 h-full rounded-md border border-neutral-500 py-5 px-4 overflow-y-auto'>
       {userKey?(<div className='panel-wraper w-full h-full'>
         {isOpen && <Modal/>}
+        <div className='flex justify-between items-center'>
         <PageTitle title={pageTitle}/>
+          <button className='text-sm py-1 px-3 border border-neutral-500 rounded-md hover:bg-neutral-600 hover:text-neutral-50 cursor-pointer mb-1 sm:block md:hidden xl:hidden' onClick={handleOpenModal}>할 일 추가</button>
+        </div>
+        
         <div className='items flex flex-wrap'>
           {loading ? (
             <SkeletonTheme baseColor='#1c1c1c' highlightColor='#444' width='100%' height='25vh'>
