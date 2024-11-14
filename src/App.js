@@ -7,6 +7,7 @@ import Important from './Important'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+console.log('test');
 
 const App = () => {
   return (
