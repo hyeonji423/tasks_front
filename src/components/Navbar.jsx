@@ -19,7 +19,7 @@ import { RiLoginBoxFill, RiLogoutBoxFil, RiLogoutBoxFill } from "react-icons/ri"
 
 const Navbar = ({menuIdx}) => {
   const dispatch = useDispatch()
-  const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
+  const googleClientId = process.env.REACT_APP_AUTH_CLIENT_ID
   const user = useSelector((state)=>state.auth.authData)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const { given_name } = user || {}
