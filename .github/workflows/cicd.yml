@@ -23,11 +23,20 @@ jobs:
       - name: Sign in to Docker Hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build Docker Image
-        run: docker build -t marshallhch/aicc-react-todo-cicd .
+        run: docker build -t hyeonji0423/tasks_front .
       - name: Push Docker Image
-        run: docker push marshallhch/aicc-react-todo-cicd:latest
+        run: docker push hyeonji0423/tasks_front:latest
 
 
   deploy:
     needs: build
     runs-on: aws-ec2
+
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull hyeonji0423/tasks_front:latest
+      - name: Delete existing container
+        run: docker rm -f reactContainer
+      - name: Run container
+        run: docker run -d -p 80:80 --name reactContainer hyeonji0423/tasks_front
+
