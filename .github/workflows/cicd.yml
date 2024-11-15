@@ -38,4 +38,4 @@ jobs:
         run: docker rm -f reactContainer
       - name: Run container
         run: docker run -d -p 80:80 --name reactContainer hyeonji0423/tasks_front
-
+        
