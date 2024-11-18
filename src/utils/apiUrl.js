@@ -1,5 +1,5 @@
 // const rootPath = 'http://localhost:8000'
-const rootPath = 'http://54.196.182.57'
+const rootPath = 'https://back.aicc4hyeonji.site'
 
 const GET_TASKS_API_URL = `${rootPath}/getTasks`
 const DELETE_TASK_API_URL = `${rootPath}/deleteTask`
